@@ -14,17 +14,17 @@ def home():
 def generate():
     filiere_id = request.args.get("filiere_id")
 
-    # الاتصال بقاعدة البيانات
+    
     conn = connect()
     c = conn.cursor()
 
-    # جلب القاعات
+    
     salles = [
         dict(zip([col[0] for col in c.description], row))
         for row in c.execute("SELECT * FROM salle")
     ]
 
-    # جلب الأزمنة
+    
     creneaux = [
         dict(zip([col[0] for col in c.description], row))
         for row in c.execute("SELECT * FROM creneau")
@@ -32,13 +32,10 @@ def generate():
 
     conn.close()
 
-    # 🔥 توليد 14 حصة لكل groupe
     cours_list = generate_cours_list(filiere_id)
 
-    # 🔥 تشغيل backtracking
     solution = backtracking(cours_list, salles, creneaux)
 
-    # تحويل النتيجة JSON
     result = []
     if solution:
         for s in solution:

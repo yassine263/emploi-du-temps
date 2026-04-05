@@ -1,22 +1,22 @@
-/* جسم الصفحة */
+
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background: #f5f7fb;
     margin: 20px;
 }
 
-/* الجدول */
+
 .emploi {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
     font-family: Arial, sans-serif;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* ظل خفيف للجدول */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
     border-radius: 10px;
     overflow: hidden;
 }
 
-/* رؤوس الجدول */
+
 .emploi th {
     background: linear-gradient(90deg, #5b4db2, #7a6df0);
     color: white;
@@ -25,7 +25,7 @@ body {
     text-transform: uppercase;
 }
 
-/* العمود الأول للوقت */
+
 .emploi th.time, .emploi td.time {
     background: #2c4e73; 
     color: rgb(22, 21, 21);
@@ -33,7 +33,7 @@ body {
     text-align: center;
 }
 
-/* الخانات */
+
 .emploi td {
     border: 1px solid #ddd;
     height: 100px;
@@ -43,7 +43,7 @@ body {
     position: relative;
 }
 
-/* تظليل الصفوف الفردية والثنائية */
+
 .emploi tr:nth-child(even) td {
     background-color: #f9f9f9;
 }
@@ -51,13 +51,13 @@ body {
     background-color: #ffffff;
 }
 
-/* تأثير hover */
+
 .emploi td:hover {
     background: #f0f4ff;
     transform: scale(1.02);
 }
 
-/* الكورس داخل الخانة */
+
 .course {
     display: inline-block;
     background: #e3e8f0;
@@ -71,7 +71,7 @@ body {
     box-sizing: border-box;
 }
 
-/* خانات فارغة */
+
 .disabled {
     background-color: #eee;
 }

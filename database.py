@@ -8,7 +8,6 @@ def init_db():
     conn = connect()
     c = conn.cursor()
 
-    # Filiere
     c.execute("""
     CREATE TABLE IF NOT EXISTS filiere (
         id INTEGER PRIMARY KEY,
@@ -16,7 +15,6 @@ def init_db():
     )
     """)
 
-    # Prof
     c.execute("""
     CREATE TABLE IF NOT EXISTS prof (
         id INTEGER PRIMARY KEY,
@@ -24,7 +22,6 @@ def init_db():
     )
     """)
 
-    # Groupe (TD/TP)
     c.execute("""
     CREATE TABLE IF NOT EXISTS groupe (
         id INTEGER PRIMARY KEY,
@@ -33,7 +30,6 @@ def init_db():
     )
     """)
 
-    # Salle
     c.execute("""
     CREATE TABLE IF NOT EXISTS salle (
         id INTEGER PRIMARY KEY,
@@ -43,7 +39,6 @@ def init_db():
     )
     """)
 
-    # Cours
     c.execute("""
     CREATE TABLE IF NOT EXISTS cours (
         id INTEGER PRIMARY KEY,
@@ -55,7 +50,6 @@ def init_db():
     )
     """)
 
-    # Créneaux
     c.execute("""
     CREATE TABLE IF NOT EXISTS creneau (
         id INTEGER PRIMARY KEY,
