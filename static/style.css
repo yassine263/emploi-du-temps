@@ -31,8 +31,8 @@ body {
 
 .emploi td {
     border: 1px solid #ddd;
-    height: 80px;           /* نقصت شوية ارتفاع الخلية */
-    width: 100px;           /* نقصت شوية عرض الخلية */
+    height: 80px;           
+    width: 100px;           
     background: #fff;
     transition: background 0.2s, transform 0.2s;
     position: relative;
@@ -50,17 +50,17 @@ body {
     transform: scale(1.02);
 }
 
-/* ====== الكورس ====== */
+
 .course {
     display: inline-block;
     background: #e3e8f0;
     border-left: 5px solid #5b4db2;
     border-radius: 8px;
-    padding: 10px;          /* زدت شوية padding باش الاسم يبان أكبر */
-    font-size: 15px;        /* كبرنا حجم النص */
+    padding: 10px;         
+    font-size: 15px;        
     width: 90%;
     margin: auto;
-    line-height: 1.3;       /* شوي زيادة فـ line-height */
+    line-height: 1.3;      
     box-sizing: border-box;
 }
 
