@@ -78,3 +78,4 @@ def backtracking(cours_list, salles, creneaux, solution=None, index=0):
 
     return None
 
+

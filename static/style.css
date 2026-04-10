@@ -46,7 +46,7 @@ body {
 }
 
 .emploi td:hover {
-    background: #f0f4ff;
+    background: #fefff0;
     transform: scale(1.02);
 }
 
@@ -54,7 +54,7 @@ body {
 .course {
     display: inline-block;
     background: #e3e8f0;
-    border-left: 5px solid #5b4db2;
+    border-left: 5px solid #7a6df0;
     border-radius: 8px;
     padding: 10px;         
     font-size: 15px;        
@@ -67,6 +67,3 @@ body {
 .disabled {
     background-color: #eee;
 }
-
-
-
