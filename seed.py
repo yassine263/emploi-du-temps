@@ -9,12 +9,20 @@ def seed():
     for t in tables:
         c.execute(f"DELETE FROM {t}")
 
+    
     filieres = [(i, f"Filiere {i}") for i in range(1, 11)]
     c.executemany("INSERT INTO filiere VALUES (?,?)", filieres)
 
-    profs = [(i, f"Prof {i}") for i in range(1, 101)]
+    
+    names = [
+        "Dr Yassine", "Dr Ahmed", "Dr Ali", "Dr Sara", "Dr Fatima",
+        "Dr Hassan", "Dr Salma", "Dr Karim", "Dr Noura", "Dr Imane"
+    ]
+
+    profs = [(i, random.choice(names)) for i in range(1, 101)]
     c.executemany("INSERT INTO prof VALUES (?,?)", profs)
 
+    
     groupes = []
     gid = 1
     for f in range(1, 11):
@@ -24,6 +32,7 @@ def seed():
         gid += 1
     c.executemany("INSERT INTO groupe VALUES (?,?,?)", groupes)
 
+    
     salles = []
 
     for i in range(1, 9):
@@ -36,6 +45,7 @@ def seed():
         sid += 1
     c.executemany("INSERT INTO salle VALUES (?,?,?,?)", salles)
 
+    
     jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
     heures = ["08:30","10:15","12:00","14:30","16:15"]
     creneaux = []
@@ -48,6 +58,7 @@ def seed():
             cid += 1
     c.executemany("INSERT INTO creneau VALUES (?,?)", creneaux)
 
+    
     modules = ["Algo","BD","Reseaux","Python","IA","Systeme","Web"]
 
     cid = 1
@@ -57,7 +68,6 @@ def seed():
                 continue
             groupe_id = g[0]
 
-            
             for m in modules[:7]:
                 cours = (cid, f"{m} CM", random.randint(1,100), groupe_id, 150, 0)
                 c.execute("INSERT INTO cours VALUES (?,?,?,?,?,?)", cours)
@@ -75,7 +85,7 @@ def seed():
 
     conn.commit()
     conn.close()
-    print("DATABASE READY: 7 CM, 5 TD, 2 TP per group per week ")
+    print("DATABASE READY ")
 
 if __name__ == "__main__":
     seed()

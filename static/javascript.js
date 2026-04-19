@@ -5,7 +5,7 @@ function generate() {
     .then(res => res.json())
     .then(data => {
 
-    
+        
         document.querySelectorAll("td:not(.time)").forEach(td => {
             td.innerHTML = "";
         });
@@ -31,7 +31,6 @@ function generate() {
                     bgColor = "#fff3cd"; 
                 }
 
-                
                 cell.innerHTML = `
                 <div style="
                     display:inline-block;
@@ -72,19 +71,24 @@ function generate() {
                                 display:flex;
                                 align-items:center;
                                 justify-content:center;
+                                font-size:12px;
                             ">
                                 ${salleText}
                             </div>
 
-                            <!-- Module -->
+                            <!-- Module + Prof -->
                             <div style="
                                 width:50%;
                                 display:flex;
+                                flex-direction:column;
                                 align-items:center;
                                 justify-content:center;
-                                font-weight:500;
+                                font-size:12px;
                             ">
-                                ${e.cours}
+                                <div>${e.cours}</div>
+                                <div style="font-size:10px; color:#555;">
+                                    ${e.prof}
+                                </div>
                             </div>
 
                         </div>
@@ -101,8 +105,11 @@ function generate() {
                             ">
                                 ${salleText}
                             </div>
-                            <div>
-                                ${e.cours}
+
+                            <div>${e.cours}</div>
+
+                            <div style="font-size:11px; color:#555;">
+                                ${e.prof}
                             </div>
                         </div>
                         `
@@ -115,3 +122,4 @@ function generate() {
     })
     .catch(err => console.error(err));
 }
+
