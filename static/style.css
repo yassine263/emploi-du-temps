@@ -32,7 +32,7 @@ body {
 .emploi td {
     border: 1px solid #ddd;
     height: 80px;           
-    width: 100px;           
+    width: 160px;           
     background: #fff;
     transition: background 0.2s, transform 0.2s;
     position: relative;
