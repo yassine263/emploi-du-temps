@@ -10,6 +10,11 @@
 
 <h2 class="text-center mb-4">Emploi du Temps </h2>
 
+<button onclick="location.href='/gestion'">Gestion Académique</button>
+<button onclick="location.href='/'">Emploi du Temps</button>
+
+
+
 <div class="text-center mb-3">
     <select id="filiere" class="form-select w-25 d-inline">
         <option value="1">S1 INFO</option>
@@ -79,10 +84,10 @@
         </tr>
     </tbody>
 </table>
-
+<a href="/gestion">
+    <button>Gérer Profs & Salles</button>
+</a>
 <script src="{{ url_for('static', filename='javascript.js') }}"></script>
 
 </body>
 </html>
-
-

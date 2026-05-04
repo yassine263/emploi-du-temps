@@ -1,125 +1,118 @@
+
 function generate() {
     const filiere_id = document.getElementById("filiere").value;
 
     fetch(`/generate?filiere_id=${filiere_id}`)
-    .then(res => res.json())
-    .then(data => {
+        .then(res => res.json())
+        .then(data => {
 
-        
-        document.querySelectorAll("td:not(.time)").forEach(td => {
-            td.innerHTML = "";
-        });
+            
+            document.querySelectorAll("td:not(.time)").forEach(td => {
+                td.innerHTML = "";
+            });
 
-        data.forEach(e => {
-            let cell = document.getElementById(e.creneau);
+            data.forEach(e => {
+                let cell = document.getElementById(e.creneau);
+                if (!cell) return;
 
-            if (cell) {
+                let salleText = (
+                    e.salle.toLowerCase().includes("amphi") ||
+                    e.salle.toLowerCase().includes("labo")
+                ) ? e.salle : "Salle " + e.salle;
 
-                
-                let salleText;
-
-                if (e.salle.toLowerCase().includes("amphi") || 
-                    e.salle.toLowerCase().includes("labo")) {
-                    salleText = e.salle;
-                } else {
-                    salleText = "Salle " + e.salle;
-                }
-
-                let bgColor = "#f8f9fa"; 
-
-                if (e.type === "TD" || e.type === "TP") {
-                    bgColor = "#fff3cd"; 
-                }
+                let bgColor = (e.type === "TD" || e.type === "TP")
+                    ? "#fff3cd"
+                    : "#f8f9fa";
 
                 cell.innerHTML = `
-                <div style="
-                    display:inline-block;
-                    border:1px solid #ccc;
-                    border-radius:4px;
-                    font-size:14px;
-                    width:150px;
-                    min-height:55px;
-                    overflow:hidden;
-                    background:${bgColor};
-                ">
-
-                    ${
-                        (e.type === "TD" || e.type === "TP")
-                        ?
-                        `
-                        <div style="display:flex; text-align:center;">
-
-                            <!-- TD / TP -->
-                            <div style="
-                                width:20%;
-                                background:#ffeeba;
-                                font-weight:bold;
-                                border-right:1px solid #ccc;
-                                display:flex;
-                                align-items:center;
-                                justify-content:center;
-                            ">
-                                ${e.type}
-                            </div>
-
-                            <!-- Salle -->
-                            <div style="
-                                width:30%;
-                                font-weight:bold;
-                                color:#0d6efd;
-                                border-right:1px solid #ccc;
-                                display:flex;
-                                align-items:center;
-                                justify-content:center;
-                                font-size:12px;
-                            ">
-                                ${salleText}
-                            </div>
-
-                            <!-- Module + Prof -->
-                            <div style="
-                                width:50%;
-                                display:flex;
-                                flex-direction:column;
-                                align-items:center;
-                                justify-content:center;
-                                font-size:12px;
-                            ">
-                                <div>${e.cours}</div>
-                                <div style="font-size:10px; color:#555;">
-                                    ${e.prof}
-                                </div>
-                            </div>
-
+                    <div style="
+                        display:inline-block;
+                        border:1px solid #ccc;
+                        border-radius:4px;
+                        font-size:14px;
+                        width:150px;
+                        min-height:55px;
+                        overflow:hidden;
+                        background:${bgColor};
+                        text-align:center;
+                        padding:5px;
+                    ">
+                        <div style="font-weight:bold;color:#0d6efd;">
+                            ${salleText}
                         </div>
-                        `
-                        :
-                        `
-                        <!-- CM -->
-                        <div style="text-align:center; padding:5px;">
-                            <div style="
-                                font-weight:bold;
-                                border-bottom:1px solid #ccc;
-                                margin-bottom:3px;
-                                color:#0d6efd;
-                            ">
-                                ${salleText}
-                            </div>
 
-                            <div>${e.cours}</div>
+                        <div>${e.cours}</div>
 
-                            <div style="font-size:11px; color:#555;">
-                                ${e.prof}
-                            </div>
+                        <div style="font-size:11px;color:#555;">
+                            ${e.prof}
                         </div>
-                        `
-                    }
-
-                </div>
+                    </div>
                 `;
-            }
-        });
-    })
-    .catch(err => console.error(err));
+            });
+        })
+        .catch(err => console.error(err));
 }
+
+
+
+async function loadProfs() {
+    const res = await fetch("/api/profs");
+    const data = await res.json();
+
+    const tbody = document.getElementById("profs-tbody");
+    tbody.innerHTML = "";
+
+    data.forEach(p => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${p.nom}</td>
+                <td>${p.prenom}</td>
+                <td>${p.email || ""}</td>
+                <td>${p.specialite || ""}</td>
+                <td>
+                    <button onclick="deleteProf(${p.id})"> Supprimer</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+
+
+async function addProf() {
+
+    const data = {
+        nom: document.getElementById("nom").value,
+        prenom: document.getElementById("prenom").value,
+        email: document.getElementById("email").value,
+        specialite: document.getElementById("specialite").value
+    };
+
+    await fetch("/api/profs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    
+    document.getElementById("form-prof").reset();
+    loadProfs();
+}
+
+
+
+async function deleteProf(id) {
+    await fetch(`/api/profs/${id}`, {
+        method: "DELETE"
+    });
+
+    loadProfs();
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadProfs();
+});
+
+
 
